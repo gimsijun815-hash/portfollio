@@ -3,6 +3,19 @@ import './App.css'
 
 const interests = ['게임', '디지털 만들기']
 
+const projects = [
+  {
+    id: 'robot-arm-actuator',
+    title: '로봇팔 액추에이터 제작',
+    description: '교내 팀 프로젝트에서 로봇팔 액추에이터의 설계와 부품 조립을 맡았습니다.',
+    type: '교내 팀 프로젝트',
+    role: '액추에이터 설계 및 부품 조립',
+    tools: '3D 프린터, 필라멘트',
+    result: '조립 후 실제 움직임 확인',
+    learning: '이번 제작을 통해 3D 프린팅 부품의 정밀도가 액추에이터의 내구성에 영향을 줄 수 있다는 점을 배웠습니다.',
+  },
+]
+
 function App() {
   useEffect(() => {
     document.title = '김치전 | 자기소개'
@@ -116,14 +129,28 @@ function App() {
           <div className="section-wrap">
             <p className="eyebrow">04 / THINGS I HAVE TRIED</p>
             <h2 id="works-title">활동과 작품<span>.</span></h2>
-            <div className="empty-work">
+            {projects.length > 0 ? <div className="project-list">
+              {projects.map((project) => (
+                <article className="project-card" key={project.id} aria-labelledby={`${project.id}-title`}>
+                  <h3 id={`${project.id}-title`}>{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+                  <dl className="project-details">
+                    <div><dt>작업 형태</dt><dd>{project.type}</dd></div>
+                    <div><dt>맡은 역할</dt><dd>{project.role}</dd></div>
+                    <div><dt>사용 도구·재료</dt><dd>{project.tools}</dd></div>
+                    <div><dt>결과</dt><dd>{project.result}</dd></div>
+                    <div><dt>배운 점</dt><dd>{project.learning}</dd></div>
+                  </dl>
+                </article>
+              ))}
+            </div> : <div className="empty-work">
               <span className="empty-work-icon" aria-hidden="true">＋</span>
               <div>
                 <h3>나중에 여기에 추가할게요</h3>
                 <p>소개할 활동이나 작품이 생기면 설명과 사진을 이곳에 담을 수 있어요.</p>
               </div>
               <span className="empty-work-label">COMING LATER</span>
-            </div>
+            </div>}
           </div>
         </section>
 
